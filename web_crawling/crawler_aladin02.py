@@ -8,6 +8,16 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import traceback
 import codecs
+import mysql.connector
+
+mydb = mysql.connector.connect(
+    host = 'localhost',
+    user = 'root',
+    passwd = 'mysql',
+    database = 'jpa'
+)
+
+mycursor = mydb.cursor()
 
 d = datetime.today()
 
@@ -49,7 +59,7 @@ try:
     t.sleep(2)
 
     src = driver.page_source
-    soup = BeautifulSoup(src, 'html.parser')
+    soup = (src, 'html.parser')
 
     div_list = soup.find_all('div', class_='ss_book_box')
 
